@@ -8,54 +8,36 @@ class CustomTextField extends StatelessWidget {
   final bool numeric;
 
   CustomTextField({
-    @required this.labelText,
-    @required this.icon,
     @required this.controller,
+    @required this.icon,
+    @required this.labelText,
     this.numeric = false,
   });
 
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      width: size.width * 0.8,
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Theme.of(context).primaryColor,
-          width: 0.8,
-        ),
-        borderRadius: BorderRadius.circular(20.0),
-        color: Colors.white
+        color: Colors.deepOrange[50],
+        borderRadius: BorderRadius.circular(29),
       ),
-      margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-            child: Icon(
-              icon,
-              color: Colors.grey,
-            ),
-          ),
-          Container(
-            height: 30.0,
-            width: 0.8,
+      child: TextField(
+        controller: controller,
+        keyboardType: numeric ? TextInputType.number : TextInputType.text,
+        cursorColor: Colors.grey,
+        decoration: InputDecoration(
+          hintText: labelText,
+          icon: Icon(
+            icon,
             color: Theme.of(context).primaryColor,
-            margin: const EdgeInsets.only(left: 00.0, right: 10.0),
           ),
-          Expanded(
-            child: TextField(
-              keyboardType: numeric ? TextInputType.number : TextInputType.text,
-              controller: controller,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: labelText,
-                hintStyle: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Varela'
-                ),
-              ),
-            ),
-          )
-        ],
+          border: InputBorder.none,
+        ),
       ),
     );
   }

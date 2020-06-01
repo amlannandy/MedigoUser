@@ -47,7 +47,6 @@ class UserInfoProvider {
   }
 
   static Future takePicture(BuildContext context, Function notifyChanges) async {
-    FocusScope.of(context).unfocus(focusPrevious: true);
     final imageFile = await ImagePicker.pickImage(
       source: ImageSource.camera,
       maxWidth: 600,
@@ -65,7 +64,6 @@ class UserInfoProvider {
   }
 
   static Future uploadPicture(BuildContext context, Function notifyChanges) async {
-    FocusScope.of(context).unfocus(focusPrevious: true);
     final imageFile = await ImagePicker.pickImage(
       source: ImageSource.gallery,
       maxWidth: 600,

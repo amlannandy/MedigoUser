@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import './screens/InitScreen.dart';
 import './screens/LoginScreen.dart';
@@ -9,9 +9,9 @@ import './screens/ProfileScreen.dart';
 import './screens/UserInfoScreen.dart';
 import './screens/UploadContactsScreen.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MedigoApp());
 
-class MyApp extends StatelessWidget {
+class MedigoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color.fromRGBO(248, 80, 50, 1),
           accentColor: Color.fromRGBO(231, 56, 39, 1),
           textTheme: TextTheme(
-            title: TextStyle(
+            headline6: TextStyle(
               fontFamily: 'Lato',
               fontSize: 22,
               fontWeight: FontWeight.bold,

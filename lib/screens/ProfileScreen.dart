@@ -68,14 +68,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   _mode == ProfileMode.View ? Column(
                     children: <Widget>[
                       infoPacket("Full Name", medigoUser.name),
-                      infoPacket("Phone Number", medigoUser.phone),
                       infoPacket("City", medigoUser.city),
                       infoPacket("Age", medigoUser.age.toString()),
                     ],
                   ) : Column(
                     children: <Widget>[
                       editField(_nameController, medigoUser.name, false),
-                      infoPacket("Phone Number", medigoUser.phone),
                       editField(_cityController, medigoUser.city, false),
                       editField(_ageController, medigoUser.age.toString(), true)
                     ],

@@ -7,21 +7,17 @@ class MedigoUser {
   final String userId;
   final String name;
   final int age;
-  final String phone;
   final String imageUrl;
   final String city;
   final Position location;
-  final List emergencyContacts;
 
   MedigoUser({
     @required this.userId,
     @required this.name,
     @required this.age,
-    @required this.phone,
     @required this.city,
     @required this.location,
     @required this.imageUrl,
-    @required this.emergencyContacts,
   });
 
   factory MedigoUser.fromMap(Map data) {
@@ -29,14 +25,12 @@ class MedigoUser {
       userId: data['userId'] ?? null,
       name: data['name'] ?? null,
       age: data['age'] ?? null,
-      phone: data['phone'] ?? null,
       city: data['city'] ?? null,
       imageUrl: data['imageUrl'] ?? "https://firebasestorage.googleapis.com/v0/b/agroacres-bbsr.appspot.com/o/MedigoUser_profile_photos%2Fdefault.png?alt=media&token=bce57e61-72f5-4a9e-a211-c40523912169",
       location: Position(
         latitude: data['location'].latitude,
         longitude: data['location'].longitude,
       ) ?? null,
-      emergencyContacts: data['emergencyContacts'] ?? null,
     );
   }
 
@@ -48,14 +42,12 @@ class MedigoUser {
       userId: snapshot.documentID,
       name: data['name'] ?? null,
       age: data['age'] ?? null,
-      phone: data['phone'] ?? null,
       city: data['city'] ?? null,
       imageUrl: data['imageUrl'] ?? "https://firebasestorage.googleapis.com/v0/b/agroacres-bbsr.appspot.com/o/MedigoUser_profile_photos%2Fdefault.png?alt=media&token=bce57e61-72f5-4a9e-a211-c40523912169",
       location: Position(
         latitude: data['location'].latitude,
         longitude: data['location'].longitude,
       ) ?? null,
-      emergencyContacts: data['emergencyContacts'] ?? null,
     );
     return user;
   }

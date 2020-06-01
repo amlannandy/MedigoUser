@@ -34,11 +34,6 @@ class _InitScreenState extends State<InitScreen> {
         _redirectURL = "/userinfo";
         return true;
       }
-      if (user.emergencyContacts == null) {
-        _redirect = true;
-        _redirectURL = "/uploadcontacts";
-        return true;
-      }
       _redirectURL = "/home";
       _redirect = true;
       return true;

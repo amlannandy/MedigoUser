@@ -143,7 +143,7 @@ class UserInfo extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   padding: EdgeInsets.all(2.5),
                   child: Text(
-                    user.phone,
+                    user.city,
                     style: TextStyle(
                       fontSize: 14,
                       fontFamily: 'Varela',
