@@ -34,7 +34,7 @@ class _InitScreenState extends State<InitScreen> {
         _redirectURL = "/userinfo";
         return true;
       }
-      _redirectURL = "/home";
+      _redirectURL = "/parent";
       _redirect = true;
       return true;
 

@@ -56,30 +56,26 @@ class CustomDrawer extends StatelessWidget {
     final user = Provider.of<FirebaseUser>(context);
 
     return Drawer(
-      child: Stack(
+      child: Column(
         children: <Widget>[
-          Column(
-            children: <Widget>[
-              userInfo(user),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.64,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      buildListTitle(
-                        title: "Log out",
-                        subtitle: "Exit your account",
-                        icon: Icons.exit_to_app,
-                        context: context,
-                        onClick: () => UserInfoProvider.logOut(context),
-                      ),
-                      getDivider(),
-                    ],
+          userInfo(user),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.64,
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  buildListTitle(
+                    title: "Log out",
+                    subtitle: "Exit your account",
+                    icon: Icons.exit_to_app,
+                    context: context,
+                    onClick: () => UserInfoProvider.logOut(context),
                   ),
-                ),
-              )
-            ],
-          ),
+                  getDivider(),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -104,7 +100,10 @@ class UserInfo extends StatelessWidget {
         ),
         alignment: Alignment.bottomLeft,
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Color.fromRGBO(248, 80, 50, 1), Color.fromRGBO(231, 56, 39, 1),],
+          gradient: LinearGradient(colors: [
+            Theme.of(context).primaryColor,
+            Theme.of(context).accentColor,
+          ],
           begin: Alignment.bottomCenter,
           end: Alignment.topRight,
           ),
@@ -136,6 +135,7 @@ class UserInfo extends StatelessWidget {
                       fontSize: 20,
                       fontFamily: 'Varela',
                       fontWeight: FontWeight.w200,
+                      color: Colors.white,
                     )
                   ),
                 ),
@@ -148,6 +148,7 @@ class UserInfo extends StatelessWidget {
                       fontSize: 14,
                       fontFamily: 'Varela',
                       fontWeight: FontWeight.w100,
+                      color: Colors.white,
                     )
                   ),
                 ),

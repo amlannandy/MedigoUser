@@ -4,10 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import './screens/InitScreen.dart';
 import './screens/LoginScreen.dart';
-import './screens/HomeScreen.dart';
+import './screens/ParentScreen.dart';
 import './screens/ProfileScreen.dart';
 import './screens/UserInfoScreen.dart';
-import './screens/UploadContactsScreen.dart';
 
 void main() => runApp(MedigoApp());
 
@@ -38,8 +37,7 @@ class MedigoApp extends StatelessWidget {
           '/init' : (ctx) => InitScreen(),
           '/login' : (ctx) => LoginScreen(),
           '/userinfo' : (ctx) => UserInfoScreen(),
-          '/uploadcontacts' : (ctx) => UploadContactsScreen(),
-          '/home' : (ctx) => HomeScreen(),
+          '/parent' : (ctx) => ParentScreen(),
           '/profile' : (ctx) => ProfileScreen(),
         },
       ),
