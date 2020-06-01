@@ -81,7 +81,6 @@ class UserInfoProvider {
   }
 
 
-
   static void updateUserInfo({String name, String age, String location}) async {
     if (name.isEmpty || age.isEmpty || location.isEmpty) {
       Fluttertoast.showToast(msg: "Please fill up all the fields");
@@ -106,23 +105,7 @@ class UserInfoProvider {
       'age' : int.parse(age),
       'city' : location,
     });
-    Fluttertoast.showToast(msg: "Profile updated!", backgroundColor: Colors.green, textColor: Colors.white);
-  }
-
-  static void updateEmergencyContacts(BuildContext context, String userId, List selectedContacts) {
-    if (selectedContacts.isEmpty) {
-      Fluttertoast.showToast(msg: "Please select at least 1 emergency contact.");
-      return;
-    }
-    try {
-      Firestore.instance.collection('users').document(userId).updateData({
-        'emergencyContacts' : selectedContacts
-      });
-      Fluttertoast.showToast(msg: "Emergency contacts uploaded!");
-      Navigator.pushNamedAndRemoveUntil(context, '/init', (_) => false);
-    } catch (e) {
-      Fluttertoast.showToast(msg: "Experiencing internet issues.");
-    }
+    Fluttertoast.showToast(msg: "Profile updated", backgroundColor: Colors.green, textColor: Colors.white);
   }
 
   static Future<void> logOut(context) async {
