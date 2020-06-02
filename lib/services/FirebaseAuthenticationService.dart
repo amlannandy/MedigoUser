@@ -3,13 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-//import 'package:google_sign_in/google_sign_in.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthenticationService {
   
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  //GoogleSignIn googleSignIn = GoogleSignIn();
-
+  
   Future<void> registerWithEmail(BuildContext context, String email, String password, String confirmPassword, Function switchLoading) async {
     switchLoading();
     if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
@@ -130,34 +129,54 @@ class FirebaseAuthenticationService {
     }
   }
 
-  // Future<bool> loginWithGoogle(BuildContext context, Function switchLoading) async {
-  //   switchLoading();
-  //   try {
-  //     GoogleSignIn googleSignIn = GoogleSignIn();
-  //     GoogleSignInAccount account = await googleSignIn.signIn();
-  //     if (account == null) return false;
-  //     AuthResult res =
-  //         await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
-  //       idToken: (await account.authentication).idToken,
-  //       accessToken: (await account.authentication).accessToken,
-  //     ));
-  //     if (res.user == null) {
-  //       switchLoading();
-  //       return false;
-  //     }
-  //     Navigator.pushReplacementNamed(context, '/init');
-  //     return true;
-  //   } catch (e) {
-  //     print(e);
-  //     Fluttertoast.showToast(msg: "Error logging in using Google!");
-  //     switchLoading();
-  //     return false;
-  //   }
-  // }
+  Future<bool> loginWithGoogle(BuildContext context, Function switchLoading) async {
+    switchLoading();
+    try {
+      GoogleSignIn googleSignIn = GoogleSignIn();
+      GoogleSignInAccount account = await googleSignIn.signIn();
+      if (account == null) return false;
+      AuthResult res =
+          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+        idToken: (await account.authentication).idToken,
+        accessToken: (await account.authentication).accessToken,
+      ));
+      if (res.user == null) {
+        switchLoading();
+        return false;
+      }
+      Navigator.pushReplacementNamed(context, '/init');
+      return true;
+    } catch (e) {
+      print(e);
+      Fluttertoast.showToast(msg: "Error logging in using Google!");
+      switchLoading();
+      return false;
+    }
+  }
 
+  void refreshAndCheck(BuildContext context) async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    await user.reload();
+    if (user.isEmailVerified) {
+      Fluttertoast.showToast(
+        msg: "Email verifed!",
+        backgroundColor: Colors.green,
+        textColor: Colors.white
+      );
+      Navigator.of(context).pushReplacementNamed('/init');
+    } else {
+      Fluttertoast.showToast(
+        msg: "Email not verified!",
+        backgroundColor: Colors.red,
+        textColor: Colors.white
+      );
+    }
+  }
 
-  Future<void> signOut(BuildContext context) async {
+  Future<void> logOut(BuildContext context) async {
+    GoogleSignIn googleSignIn = GoogleSignIn();
     await _auth.signOut();
+    await googleSignIn.signOut();
     Navigator.pushNamedAndRemoveUntil(context, '/init', (_) => false);
   }
 

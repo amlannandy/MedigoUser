@@ -25,6 +25,15 @@ class _InitScreenState extends State<InitScreen> {
         _redirectURL = "/login";
         return true;
       }
+      if (currentUser.email != null) {
+        if (currentUser.email.isNotEmpty) {
+          if (!currentUser.isEmailVerified) {
+            _redirect = true;
+            _redirectURL = "/emailverification";
+            return true;
+          }
+        }
+      }
       print("Current User: $currentUser");
       print(currentUser.uid);
       UserDatabaseService databaseService = UserDatabaseService();
@@ -48,12 +57,7 @@ class _InitScreenState extends State<InitScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [Color.fromRGBO(248, 80, 50, 1), Color.fromRGBO(231, 56, 39, 1),],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topRight,
-          ),
-        ),
+        color: Theme.of(context).primaryColor,
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

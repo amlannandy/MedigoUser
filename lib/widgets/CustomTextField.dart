@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       width: size.width * 0.8,
       decoration: BoxDecoration(
-        color: Colors.deepOrange[50],
+        color: Theme.of(context).accentColor.withOpacity(0.2),
         borderRadius: BorderRadius.circular(29),
       ),
       child: TextField(

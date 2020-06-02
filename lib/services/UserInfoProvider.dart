@@ -108,9 +108,4 @@ class UserInfoProvider {
     Fluttertoast.showToast(msg: "Profile updated", backgroundColor: Colors.green, textColor: Colors.white);
   }
 
-  static Future<void> logOut(context) async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.pushNamedAndRemoveUntil(context, '/init', (_) => false);
-  }
-
 }

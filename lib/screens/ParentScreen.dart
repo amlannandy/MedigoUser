@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../widgets/AppBarDeco.dart';
 import '../widgets/CustomDrawer.dart';
 import '../screens/HomeScreen.dart';
 import '../screens/DoctorsListScreen.dart';
+import '../screens/MenuScreen.dart';
 import '../screens/AppointmentsScreen.dart';
 
 class ParentScreen extends StatefulWidget {
@@ -16,13 +16,14 @@ class ParentScreen extends StatefulWidget {
 
 class _ParentScreenState extends State<ParentScreen> {
   
-  int _selectedIndex = 1;
-  final _pageController = PageController(initialPage: 1);
+  int _selectedIndex = 0;
+  final _pageController = PageController(initialPage: 0);
 
   Map<String, Widget> _pages = {
-    "Appointments" : AppointmentsScreen(),
     "Home" : HomeScreen(),
+    "Sessions" : AppointmentsScreen(),
     "Doctors" : DoctorsListsScreen(),
+    "Menu" :MenuScreen(),
   };
 
   @override
@@ -35,21 +36,6 @@ class _ParentScreenState extends State<ParentScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: AppBarDeco("MediGo"),
-        elevation: 0,
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(LineIcons.bars),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),
-      ),
       drawer: CustomDrawer(),
       body: PageView(
         onPageChanged: (index) => setState(() => _selectedIndex = index),
@@ -80,20 +66,26 @@ class _ParentScreenState extends State<ParentScreen> {
             tabBackgroundColor: Colors.white,
             tabs: [
               GButton(
-                icon: LineIcons.history,
-                text: 'Appointments',
+                icon: LineIcons.home,
+                text: _pages.keys.elementAt(0),
                 iconColor: Colors.white,
                 onPressed: (index) => setState(() => _selectedIndex = index),
               ),
               GButton(
-                icon: LineIcons.home,
-                text: 'Home',
+                icon: LineIcons.history,
+                text: _pages.keys.elementAt(1),
                 iconColor: Colors.white,
                 onPressed: (index) => setState(() => _selectedIndex = index),
               ),
               GButton(
                 icon: LineIcons.users,
-                text: 'Doctors',
+                text: _pages.keys.elementAt(2),
+                iconColor: Colors.white,
+                onPressed: (index) => setState(() => _selectedIndex = index),
+              ),
+              GButton(
+                icon: LineIcons.bars,
+                text: _pages.keys.elementAt(3),
                 iconColor: Colors.white,
                 onPressed: (index) => setState(() => _selectedIndex = index),
               ),
@@ -114,4 +106,5 @@ class _ParentScreenState extends State<ParentScreen> {
       ),
     );
   }
+
 }

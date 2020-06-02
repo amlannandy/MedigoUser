@@ -57,14 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget getBackground(BuildContext context) {
     return Container(
       alignment: Alignment.topCenter,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).primaryColor,
-            Theme.of(context).accentColor,
-          ]
-        )
-      ),
+      color: Theme.of(context).primaryColor,
     );
   }
 
@@ -95,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
               fontFamily: 'Lato',
               fontSize: 32,
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).accentColor.withOpacity(0.7),
+              color: Theme.of(context).primaryColor.withOpacity(0.8),
             ),
           ),
           SizedBox(
@@ -146,11 +139,11 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SocialIcon(
-                iconSrc: "assets/images/facebook.svg",
-                press: () {},
+                iconSrc: "assets/images/google-plus.svg",
+                press: () => _auth.loginWithGoogle(context, _switchLoading),
               ),
               SocialIcon(
-                iconSrc: "assets/images/google-plus.svg",
+                iconSrc: "assets/images/facebook.svg",
                 press: () {},
               ),
             ],

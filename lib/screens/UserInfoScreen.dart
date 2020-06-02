@@ -1,11 +1,15 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:permission_handler/permission_handler.dart';
 
+import '../widgets/PrimaryButton.dart';
 import '../widgets/CustomTextField.dart';
-import '../widgets/SuccessButton.dart';
 import '../widgets/LightIconButton.dart';
 import '../services/UserInfoProvider.dart';
+
+const GOOGLE_API_KEY = 'AIzaSyDBVjfQa1q54VHunVlWzaUDOvTmdkqUzC0';
 
 class UserInfoScreen extends StatefulWidget {
 
@@ -17,21 +21,34 @@ class UserInfoScreen extends StatefulWidget {
 
 class _UserInfoScreenState extends State<UserInfoScreen> {
 
+  Position _currentPosition;
+
   final _nameController = TextEditingController();
   final _ageController = TextEditingController();
   final _locationController = TextEditingController();
 
   @override
   void initState() {
-    getStoragePermission();
+    _getUserLocation();
     super.initState();
   }
 
-  void getStoragePermission() async {
-    await PermissionHandler().requestPermissions([PermissionGroup.contacts]);
-    PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.contacts);
-    print(permission.value);
+  void _getUserLocation() async {
+    try {
+      _currentPosition = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=${_currentPosition.latitude},${_currentPosition.longitude}&key=$GOOGLE_API_KEY';
+      final response = await http.get(url);
+      final data = json.decode(response.body);
+      if (data != null) {
+        print(data);
+        final city = data['results'][0]['address_components'][4]['long_name'];
+        setState(() => _locationController.text = city);
+      }
+    } catch (e) {
+      print(e);
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,15 +81,16 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
           ),
           Positioned(
             bottom: 20,
-            child: SuccessButton(
-              text: "Submit",
-              icon: LineIcons.check_circle,
-              onPress: () => UserInfoProvider.uploadUserInfo(
+            child: PrimaryButton(
+              text: "SUBMIT",
+              press: () => UserInfoProvider.uploadUserInfo(
                 context: context,
                 name: _nameController.text,
                 age: _ageController.text,
                 location: _locationController.text,
+                userPosition: _currentPosition,
               ),
+              color: Theme.of(context).primaryColor,
             ),
           )
         ],

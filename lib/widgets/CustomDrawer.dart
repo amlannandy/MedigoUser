@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/MedigoUser.dart';
-import '../services/UserInfoProvider.dart';
 import '../services/UserDatabaseService.dart';
+import '../services/FirebaseAuthenticationService.dart';
 
 class CustomDrawer extends StatelessWidget {
 
   final UserDatabaseService userDatabaseService = UserDatabaseService();
+  final FirebaseAuthenticationService _auth = FirebaseAuthenticationService();
 
   Widget userInfo(FirebaseUser user) {
     if (user != null) {
@@ -69,7 +70,7 @@ class CustomDrawer extends StatelessWidget {
                     subtitle: "Exit your account",
                     icon: Icons.exit_to_app,
                     context: context,
-                    onClick: () => UserInfoProvider.logOut(context),
+                    onClick: () => _auth.logOut(context),
                   ),
                   getDivider(),
                 ],
@@ -99,15 +100,7 @@ class UserInfo extends StatelessWidget {
           left: 15,
         ),
         alignment: Alignment.bottomLeft,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Theme.of(context).primaryColor,
-            Theme.of(context).accentColor,
-          ],
-          begin: Alignment.bottomCenter,
-          end: Alignment.topRight,
-          ),
-        ),
+        color: Theme.of(context).primaryColor,
         child: user == null ? Container() : Row(
           children: <Widget>[
             Container(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../widgets/AppBarDeco.dart';
 import '../models/MedigoUser.dart';
 import '../widgets/CustomText.dart';
 import '../services/UserDatabaseService.dart';
@@ -35,7 +34,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: AppBarDeco("Your Profile"),
+        title: Text(
+          'Profile',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        centerTitle: true,
         elevation: 0,
       ),
       body: StreamBuilder<MedigoUser>(

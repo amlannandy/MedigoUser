@@ -7,6 +7,7 @@ import './screens/LoginScreen.dart';
 import './screens/ParentScreen.dart';
 import './screens/ProfileScreen.dart';
 import './screens/UserInfoScreen.dart';
+import './screens/EmailVerificationScreen.dart';
 
 void main() => runApp(MedigoApp());
 
@@ -21,8 +22,8 @@ class MedigoApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          primaryColor: Color.fromRGBO(248, 80, 50, 1),
-          accentColor: Color.fromRGBO(231, 56, 39, 1),
+          primaryColor: Color(0xff581b98),
+          accentColor: Colors.purple[200],
           textTheme: TextTheme(
             headline6: TextStyle(
               fontFamily: 'Lato',
@@ -37,6 +38,7 @@ class MedigoApp extends StatelessWidget {
           '/init' : (ctx) => InitScreen(),
           '/login' : (ctx) => LoginScreen(),
           '/userinfo' : (ctx) => UserInfoScreen(),
+          '/emailverification' : (ctx) => EmailVerificationScreen(),
           '/parent' : (ctx) => ParentScreen(),
           '/profile' : (ctx) => ProfileScreen(),
         },
