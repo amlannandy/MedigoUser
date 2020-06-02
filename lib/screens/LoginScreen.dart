@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget getLoginCard(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: MediaQuery.of(context).size.height * 0.82,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -133,6 +133,23 @@ class _LoginScreenState extends State<LoginScreen> {
             text: _authMode == AuthMode.Login ? 'REGISTER INSTEAD' : 'LOGIN INSTEAD',
             press: _switchAuthMode,
             color: Theme.of(context).primaryColor
+          ),
+          GestureDetector(
+            onTap: () => Navigator.of(context).pushNamed('/passwordreset'),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 5
+              ),
+              child: Text(
+                'Forgot Password?',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor.withOpacity(0.8),
+                  fontFamily: 'Lato',
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
           StyledDivider('OR'),
           Row(

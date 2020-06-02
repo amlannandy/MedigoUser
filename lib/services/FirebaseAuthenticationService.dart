@@ -102,7 +102,7 @@ class FirebaseAuthenticationService {
     }
   }
   
-  void sendPasswordResetEmail(BuildContext context, String email) {
+  void sendPasswordResetEmail(BuildContext context, String email, Function successTrigger) {
     if (email.isEmpty) {
       Fluttertoast.showToast(msg: "Please enter your email address");
       return;
@@ -114,12 +114,12 @@ class FirebaseAuthenticationService {
     try {
       _auth.sendPasswordResetEmail(email: email);
       Fluttertoast.showToast(
-        msg: "Password reset mail sent!",
+        msg: "Mail sent",
         backgroundColor: Colors.green,
         textColor: Colors.white,
         toastLength: Toast.LENGTH_LONG
       );
-      Navigator.pushNamedAndRemoveUntil(context, '/init', (_) => false);
+      successTrigger();
     } catch (e) {
       Fluttertoast.showToast(
         msg: "Error sending mail. Please try later",

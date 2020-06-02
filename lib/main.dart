@@ -7,6 +7,7 @@ import './screens/LoginScreen.dart';
 import './screens/ParentScreen.dart';
 import './screens/ProfileScreen.dart';
 import './screens/UserInfoScreen.dart';
+import './screens/PasswordResetScreen.dart';
 import './screens/EmailVerificationScreen.dart';
 
 void main() => runApp(MedigoApp());
@@ -38,9 +39,10 @@ class MedigoApp extends StatelessWidget {
           '/init' : (ctx) => InitScreen(),
           '/login' : (ctx) => LoginScreen(),
           '/userinfo' : (ctx) => UserInfoScreen(),
-          '/emailverification' : (ctx) => EmailVerificationScreen(),
           '/parent' : (ctx) => ParentScreen(),
           '/profile' : (ctx) => ProfileScreen(),
+          '/emailverification' : (ctx) => EmailVerificationScreen(),
+          '/passwordreset' : (ctx) => PasswordResetScreen(),
         },
       ),
     );
