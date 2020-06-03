@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SocialIcon(
                 iconSrc: "assets/images/facebook.svg",
-                press: () {},
+                press: () => _auth.loginWithFacebook(context, _switchLoading),
               ),
             ],
           ),

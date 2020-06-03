@@ -1,13 +1,16 @@
-import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class FirebaseAuthenticationService {
   
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  GoogleSignIn _googleSignIn = GoogleSignIn();
+  FacebookLogin _facebookLogin = FacebookLogin();
   
   Future<void> registerWithEmail(BuildContext context, String email, String password, String confirmPassword, Function switchLoading) async {
     switchLoading();
@@ -132,11 +135,9 @@ class FirebaseAuthenticationService {
   Future<bool> loginWithGoogle(BuildContext context, Function switchLoading) async {
     switchLoading();
     try {
-      GoogleSignIn googleSignIn = GoogleSignIn();
-      GoogleSignInAccount account = await googleSignIn.signIn();
+      GoogleSignInAccount account = await _googleSignIn.signIn();
       if (account == null) return false;
-      AuthResult res =
-          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+      AuthResult res = await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
         idToken: (await account.authentication).idToken,
         accessToken: (await account.authentication).accessToken,
       ));
@@ -173,10 +174,50 @@ class FirebaseAuthenticationService {
     }
   }
 
+  Future<bool> loginWithFacebook(BuildContext context, Function switchLoading) async {
+    FacebookLoginResult facebookLoginResult = await _handleFBSignIn(switchLoading);
+    if(facebookLoginResult.status == FacebookLoginStatus.cancelledByUser) {
+      print(facebookLoginResult.status);
+      switchLoading();
+      return false;
+    }
+    final accessToken = facebookLoginResult.accessToken.token;
+    if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
+      final facebookAuthCred = FacebookAuthProvider.getCredential(accessToken: accessToken);
+      final user = await _auth.signInWithCredential(facebookAuthCred);
+      print("User - " + user.user.uid);
+      switchLoading();
+      Navigator.of(context).pushReplacementNamed('/init');
+      return true;
+    } else {
+      switchLoading();
+      return false;
+    }
+  }
+
+  Future<FacebookLoginResult> _handleFBSignIn(Function switchLoading) async {
+    FacebookLoginResult facebookLoginResult = await _facebookLogin.logIn(['email']);
+    switch (facebookLoginResult.status) {
+      case FacebookLoginStatus.cancelledByUser:
+        switchLoading();
+        print("Cancelled");
+        break;
+      case FacebookLoginStatus.error:
+        switchLoading();
+        print("error");
+        break;
+      case FacebookLoginStatus.loggedIn:
+        switchLoading();
+        print("Logged In");
+        break;
+    }
+    return facebookLoginResult;
+  }
+
   Future<void> logOut(BuildContext context) async {
-    GoogleSignIn googleSignIn = GoogleSignIn();
     await _auth.signOut();
-    await googleSignIn.signOut();
+    await _googleSignIn.signOut();
+    await _facebookLogin.logOut();
     Navigator.pushNamedAndRemoveUntil(context, '/init', (_) => false);
   }
 

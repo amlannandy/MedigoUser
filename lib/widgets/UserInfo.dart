@@ -19,20 +19,16 @@ class UserInfo extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height * 0.35,
       width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-      ),
-      child: user == null ? Container() : FutureBuilder<MedigoUser>(
-        future: userDatabaseService.getUser(user.uid),
+      child: user == null ? Container() : StreamBuilder<MedigoUser>(
+        stream: userDatabaseService.streamUser(user.uid),
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData) {
             return Container();
           }
           final user = snapshot.data;
           return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              SizedBox(height: 20),
               Container(
                 height: MediaQuery.of(context).size.height * 0.15,
                 width: MediaQuery.of(context).size.height * 0.15,
@@ -47,17 +43,23 @@ class UserInfo extends StatelessWidget {
               SizedBox(height: 10),
               Text(
                 user.name,
-                style: Theme.of(context).textTheme.headline6,
+                style: TextStyle(
+                  fontFamily: 'Lato',
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
               SizedBox(height: 5),
               Text(
                 user.city,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black54,
                   fontSize: 14,
                   fontFamily: 'Lato',
                 ),
               ),
+              SizedBox(height: 15),
             ],
           );
         },

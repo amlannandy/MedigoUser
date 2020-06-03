@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PasswordField extends StatelessWidget {
+class PasswordField extends StatefulWidget {
 
   final TextEditingController controller;
   final String labelText;
@@ -9,6 +9,14 @@ class PasswordField extends StatelessWidget {
     @required this.controller,
     @required this.labelText,
   });
+
+  @override
+  _PasswordFieldState createState() => _PasswordFieldState();
+}
+
+class _PasswordFieldState extends State<PasswordField> {
+
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +31,25 @@ class PasswordField extends StatelessWidget {
         borderRadius: BorderRadius.circular(29),
       ),
       child: TextField(
-        controller: controller,
-        obscureText: true,
+        controller: widget.controller,
+        obscureText: _obscureText,
         cursorColor: Colors.grey,
         decoration: InputDecoration(
-          hintText: labelText,
+          hintText: widget.labelText,
           icon: Icon(
             Icons.lock,
             color: Theme.of(context).primaryColor,
           ),
-          suffixIcon: Icon(
-            Icons.visibility,
-            color: Theme.of(context).primaryColor,
+          suffixIcon: GestureDetector(
+            onTap: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+            child: Icon(
+              _obscureText ? Icons.visibility : Icons.visibility_off,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
           border: InputBorder.none,
         ),

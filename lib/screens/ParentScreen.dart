@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../widgets/CustomDrawer.dart';
 import '../screens/HomeScreen.dart';
 import '../screens/DoctorsListScreen.dart';
 import '../screens/MenuScreen.dart';
@@ -36,7 +34,6 @@ class _ParentScreenState extends State<ParentScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      drawer: CustomDrawer(),
       body: PageView(
         onPageChanged: (index) => setState(() => _selectedIndex = index),
         controller: _pageController,
@@ -48,60 +45,90 @@ class _ParentScreenState extends State<ParentScreen> {
 
   Widget navBar(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        boxShadow: [
-          BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1)),
-        ]
-      ),
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-          child: GNav(
-            gap: 5,
-            activeColor: Theme.of(context).primaryColor,
-            iconSize: 24,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-            duration: Duration(milliseconds: 800),
-            tabBackgroundColor: Colors.white,
-            tabs: [
-              GButton(
-                icon: LineIcons.home,
-                text: _pages.keys.elementAt(0),
-                iconColor: Colors.white,
-                onPressed: (index) => setState(() => _selectedIndex = index),
+      color: Colors.transparent,
+      height: MediaQuery.of(context).size.height * 0.1,
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50),
+          topRight: Radius.circular(50),
+        ),
+        child: BottomNavigationBar(
+          elevation: 20,
+          currentIndex: _selectedIndex,
+          onTap: (index) {
+            _pageController.animateToPage(
+              index,
+              duration: Duration(milliseconds: 400),
+              curve: Curves.ease,
+            );
+            setState(() => _selectedIndex = index);
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                LineIcons.home,
+                color: Colors.white,
               ),
-              GButton(
-                icon: LineIcons.history,
-                text: _pages.keys.elementAt(1),
-                iconColor: Colors.white,
-                onPressed: (index) => setState(() => _selectedIndex = index),
+              backgroundColor: Theme.of(context).primaryColor,
+              title: Text(
+                _pages.keys.elementAt(0),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Lato',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                LineIcons.history,
+                color: Colors.white,
               ),
-              GButton(
-                icon: LineIcons.users,
-                text: _pages.keys.elementAt(2),
-                iconColor: Colors.white,
-                onPressed: (index) => setState(() => _selectedIndex = index),
+              backgroundColor: Theme.of(context).primaryColor,
+              title: Text(
+                _pages.keys.elementAt(1),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Lato',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                LineIcons.users,
+                color: Colors.white,
               ),
-              GButton(
-                icon: LineIcons.bars,
-                text: _pages.keys.elementAt(3),
-                iconColor: Colors.white,
-                onPressed: (index) => setState(() => _selectedIndex = index),
+              backgroundColor: Theme.of(context).primaryColor,
+              title: Text(
+                _pages.keys.elementAt(2),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Lato',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                LineIcons.bars,
+                color: Colors.white,
               ),
-            ],
-            selectedIndex: _selectedIndex,
-            onTabChange: (index) {
-              _pageController.animateToPage(
-                index,
-                duration: Duration(milliseconds: 400),
-                curve: Curves.ease,
-              );
-              setState(() {
-                _selectedIndex = index;
-              });
-            }
-          ),
+              backgroundColor: Theme.of(context).primaryColor,
+              title: Text(
+                _pages.keys.elementAt(3),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Lato',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ),
+          ],
         ),
       ),
     );

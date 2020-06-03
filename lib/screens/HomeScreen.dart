@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.headline6,
         ),
       ),
+      backgroundColor: Colors.red,
     );
   }
 }

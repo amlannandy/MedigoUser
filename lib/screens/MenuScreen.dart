@@ -39,10 +39,7 @@ class MenuScreen extends StatelessWidget {
       children: <Widget>[
         UserInfo(),
         Container(
-          padding: const EdgeInsets.only(
-            top: 10,
-          ),
-          height: MediaQuery.of(context).size.height * 0.53,
+          height: MediaQuery.of(context).size.height * 0.55,
           width: MediaQuery.of(context).size.width,
           child: ListView.builder(
             padding: const EdgeInsets.all(0),
