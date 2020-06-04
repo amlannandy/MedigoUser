@@ -1,7 +1,7 @@
-import 'package:Medigo/widgets/CustomTextField.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/PrimaryButton.dart';
+import '../widgets/CustomTextField.dart';
 import '../services/FirebaseAuthenticationService.dart';
 
 class PasswordResetScreen extends StatefulWidget {

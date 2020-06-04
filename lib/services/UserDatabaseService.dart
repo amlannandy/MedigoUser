@@ -1,8 +1,7 @@
-import 'package:Medigo/models/Doctor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:async';
 
 import '../models/MedigoUser.dart';
+import '../models/Doctor.dart';
 
 class UserDatabaseService {
   
