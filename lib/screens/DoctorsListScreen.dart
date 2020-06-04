@@ -52,7 +52,7 @@ class DoctorsListsScreen extends StatelessWidget {
                 }
                 return ListView.builder(
                   padding: const EdgeInsets.all(0),
-                  itemBuilder: (ctx, index) => doctorCard(context, doctors[index], () {}),
+                  itemBuilder: (ctx, index) => doctorCard(context, doctors[index]),
                   itemCount: doctors.length,
                 );
               },

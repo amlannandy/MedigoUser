@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../widgets/CustomText.dart';
 import '../models/Doctor.dart';
+import '../widgets/CustomText.dart';
+import '../services/AppointmentProvider.dart';
 
-Widget doctorCard(BuildContext context, Doctor doctor, Function createChatRoom) {
+Widget doctorCard(BuildContext context, Doctor doctor) {
   return Container(
     width: MediaQuery.of(context).size.width,
     margin: EdgeInsets.only(
@@ -26,7 +27,7 @@ Widget doctorCard(BuildContext context, Doctor doctor, Function createChatRoom) 
     child: Column(
       children: <Widget>[
         profileRow(doctor),
-        buttonsRow(context, doctor, createChatRoom),
+        buttonsRow(context, doctor),
       ],
     ),
   );
@@ -101,19 +102,19 @@ Widget profileRow(Doctor doctor) {
   );
 }
 
-Widget buttonsRow(BuildContext context, Doctor doctor, Function createChatRoom) {
+Widget buttonsRow(BuildContext context, Doctor doctor) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: <Widget>[
       lightButton(context, doctor),
-      darkButton(context, doctor, createChatRoom),
+      darkButton(context, doctor),
     ],
   );
 }
 
 Widget lightButton(BuildContext context, Doctor doctor) {
   return InkWell(
-    onTap: () {},
+    onTap: () => AppointmentProvider.createAppointment(context, doctor.userId),
     child: Container(
       width: MediaQuery.of(context).size.width * 0.45,
       padding: const EdgeInsets.all(5),
@@ -132,7 +133,7 @@ Widget lightButton(BuildContext context, Doctor doctor) {
   );
 }
 
-Widget darkButton(BuildContext context, Doctor doctor, Function createChatRoom) {
+Widget darkButton(BuildContext context, Doctor doctor) {
   return InkWell(
     onTap: () {},
     child: Container(
