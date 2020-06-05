@@ -50,6 +50,9 @@ class ChatScreen extends StatelessWidget {
           stream: userDatabaseService.streamDoctor(appointment.doctorId),
           builder: (context, snapshot) {
             final doctor = snapshot.data;
+            if (doctor == null) {
+              return Container();
+            }
             return Row(
               children: <Widget>[
                 Container(
@@ -163,7 +166,7 @@ class ChatScreen extends StatelessWidget {
             },
             icon: Icon(
               LineIcons.chevron_circle_right,
-              color: Theme.of(context).primaryColor,
+              color: Colors.black.withOpacity(0.8),
               size: 30,
             ),
           ),

@@ -33,7 +33,7 @@ class DoctorsListsScreen extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height * 0.78,
             child: StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance.collection('doctors').snapshots(),
+              stream: Firestore.instance.collection('doctors').where('isVerified', isEqualTo: true).snapshots(),
               builder: (ctx, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return loadingBanner();

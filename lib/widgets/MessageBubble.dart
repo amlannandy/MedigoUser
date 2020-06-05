@@ -18,8 +18,7 @@ Widget messageBubble(BuildContext context, Message message, String userId) {
         borderRadius: BorderRadius.circular(25)
       ),
       width: MediaQuery.of(context).size.width * 0.6,
-      child: Expanded(
-        child: Text(
+      child: Text(
           message.message,
           style: TextStyle(
             fontFamily: 'Varela',
@@ -27,7 +26,6 @@ Widget messageBubble(BuildContext context, Message message, String userId) {
             color: Colors.white
           ),
         ),
-      ),
     ),
   );
 }

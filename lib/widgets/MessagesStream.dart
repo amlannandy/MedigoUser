@@ -22,12 +22,15 @@ class MessagesStream extends StatelessWidget {
     return user == null ? Container() : StreamBuilder<QuerySnapshot>(
       stream: _firestore.collection('appointments').document(appointmentId).collection('messages').snapshots(),
       builder: (context, snapshot) {
-        final messageDocuments = snapshot.data.documents;
+        var messageDocuments;
         List<Message> messages = [];
-        if (messageDocuments != null) {
-          messageDocuments.forEach((message) {
-            messages.add(Message.fromFirestore(message));
-          });
+        if (snapshot.hasData) {
+          messageDocuments = snapshot.data.documents;
+          if (messageDocuments != null) {
+            messageDocuments.forEach((message) {
+              messages.add(Message.fromFirestore(message));
+            });
+          }
         }
         if (messages.isEmpty) {
           return Center(
