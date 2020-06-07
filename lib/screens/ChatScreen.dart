@@ -4,7 +4,9 @@ import 'package:permission_handler/permission_handler.dart';
 import '../widgets/ChatAppBar.dart';
 import '../models/Appointment.dart';
 import '../widgets/InputField.dart';
+import '../widgets/RecieveCall.dart';
 import '../widgets/MessagesStream.dart';
+import '../services/UserDatabaseService.dart';
 
 class ChatScreen extends StatefulWidget {
 
@@ -19,6 +21,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
 
   final _textController = TextEditingController();
+  final UserDatabaseService userDatabaseService = UserDatabaseService();
 
   @override
   void initState() {
@@ -35,16 +38,30 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: chatAppBar(context, widget.appointment.id, widget.appointment.doctorId),
-      body: Column(
-        children: <Widget>[
-          MessagesStream(widget.appointment.id),
-          inputField(
-            context: context,
-            controller: _textController,
-            userId: widget.appointment.userId,
-            appointmentId: widget.appointment.id,
-          ),
-        ],
+      body: StreamBuilder<Appointment>(
+        stream: userDatabaseService.streamAppointment(widget.appointment.id),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final appointment = snapshot.data;
+            if (appointment.audioCallActive) {
+              return RecieveCall(widget.appointment.id, appointment.channelId, true);
+            }
+            if (appointment.videoCallActive) {
+              return RecieveCall(widget.appointment.id, appointment.channelId, false);
+            }
+          }
+          return Column(
+            children: <Widget>[
+              MessagesStream(widget.appointment.id),
+              inputField(
+                context: context,
+                controller: _textController,
+                userId: widget.appointment.userId,
+                appointmentId: widget.appointment.id,
+              ),
+            ],
+          );
+        }
       ),
     );
   }

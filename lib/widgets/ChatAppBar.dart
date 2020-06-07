@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../models/Doctor.dart';
-import '../models/Appointment.dart';
-import '../services/AppointmentProvider.dart';
 import '../services/UserDatabaseService.dart';
 
 final UserDatabaseService userDatabaseService = UserDatabaseService();
@@ -11,13 +9,13 @@ final UserDatabaseService userDatabaseService = UserDatabaseService();
 Widget chatAppBar(BuildContext context, String appointmentId, String doctorId) {
   return AppBar(
     elevation: 0,
-    leading: IconButton(
+    leading: Navigator.of(context).canPop() ? IconButton(
       icon: Icon(
         Icons.arrow_back_ios,
         color: Colors.black.withOpacity(0.7),
       ),
-      onPressed: () => Navigator.of(context).pop()
-    ),
+      onPressed: Navigator.of(context).canPop() ? () => Navigator.of(context).pop() : null,
+    ) : null,
     backgroundColor: Colors.white,
     title: Container(
       child: StreamBuilder<Doctor>(
@@ -57,33 +55,6 @@ Widget chatAppBar(BuildContext context, String appointmentId, String doctorId) {
       ),
     ),
     actions: <Widget>[
-      StreamBuilder<Appointment>(
-        stream: userDatabaseService.streamAppointment(appointmentId),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final appointment = snapshot.data;
-            if (appointment.videoCallActive) {
-              return IconButton(
-              icon: Icon(
-                  LineIcons.video_camera,
-                  color: Colors.black.withOpacity(0.8),
-                ),
-                onPressed: () => AppointmentProvider.joinVideoCall(context, appointmentId, appointment.channelId),
-              );
-            }
-            if (appointment.audioCallActive) {
-              return IconButton(
-              icon: Icon(
-                  LineIcons.phone,
-                  color: Colors.black.withOpacity(0.8),
-                ),
-                onPressed: () => AppointmentProvider.joinAudioCall(context, appointmentId, appointment.channelId),
-              );
-            }
-          }
-          return Container();
-        }
-      ),
       PopupMenuButton(
         icon: Icon(
           LineIcons.gear,
@@ -94,14 +65,24 @@ Widget chatAppBar(BuildContext context, String appointmentId, String doctorId) {
             child: InkWell(
               onTap: () {},
               child: Container(
+                padding: const EdgeInsets.all(10),
                 width: double.infinity,
-                child: Text(
-                  "Report Patient",
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(0.8),
-                    fontFamily: 'Lato',
-                    fontSize: 16,
-                  ),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      LineIcons.warning,
+                      color: Colors.black.withOpacity(0.8),
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      "Report Patient",
+                      style: TextStyle(
+                        color: Colors.black.withOpacity(0.8),
+                        fontFamily: 'Lato',
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
