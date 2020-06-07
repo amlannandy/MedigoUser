@@ -33,19 +33,23 @@ class MessagesStream extends StatelessWidget {
           }
         }
         if (messages.isEmpty) {
-          return Center(
-            child: Text(
-              'No Messages',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 32,
-                fontFamily: 'Lato',
+          return Expanded(
+            child: Center(
+              child: Text(
+                'No Messages',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 32,
+                  fontFamily: 'Lato',
+                ),
               ),
             ),
           );
-        } 
+        }
+        messages = [...messages.reversed];
         return Expanded(
           child: ListView.builder(
+            reverse: true,
             itemBuilder: (ctx, index) => messageBubble(context, messages[index], user.uid),
             itemCount: messages.length,
           ),

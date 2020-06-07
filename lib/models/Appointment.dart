@@ -10,6 +10,9 @@ class Appointment {
   final String userId;
   final List<Message> messages;
   final Timestamp time;
+  final String channelId;
+  final bool videoCallActive;
+  final bool audioCallActive;
 
   const Appointment({
     @required this.id,
@@ -17,6 +20,9 @@ class Appointment {
     @required this.userId,
     this.messages,
     this.time,
+    this.channelId,
+    this.videoCallActive,
+    this.audioCallActive,
   });
 
   factory Appointment.fromFirestore(DocumentSnapshot snapshot) {
@@ -29,6 +35,9 @@ class Appointment {
       userId: data['userId'] ?? null,
       messages: data['messages'] ?? null,
       time: data['time'] ?? Timestamp.now(),
+      channelId: data['channelId'] ?? null,
+      videoCallActive: data['videoCallActive'] ?? false,
+      audioCallActive: data['audioCallActive'] ?? false,
     );
     return appointment;
   }

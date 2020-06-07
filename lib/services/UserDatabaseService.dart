@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/MedigoUser.dart';
 import '../models/Doctor.dart';
+import '../models/Appointment.dart';
 
 class UserDatabaseService {
   
@@ -29,6 +30,18 @@ class UserDatabaseService {
     DocumentSnapshot snapshot = await _db.collection('doctors').document(id).get();
     print(snapshot.data);
     return Doctor.fromFirestore(snapshot);
+  }
+
+  Stream<Appointment> streamAppointment(String id) {
+    return _db.collection('appointments').document(id).snapshots().map(
+      (snapshot) => Appointment.fromFirestore(snapshot)
+    );
+  }
+
+  Future<Appointment> getAppointment(String id) async {
+    DocumentSnapshot snapshot = await _db.collection('appointments').document(id).get();
+    print(snapshot.data);
+    return Appointment.fromFirestore(snapshot);
   }
 
 }

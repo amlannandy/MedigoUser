@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/Appointment.dart';
 import '../screens/ChatScreen.dart';
+import '../screens/VideoCallScreen.dart';
 
 class AppointmentProvider {
 
@@ -17,7 +18,7 @@ class AppointmentProvider {
     Firestore.instance.collection('appointments').document(appointmentId).setData({
       'userId' : user.uid,
       'doctorId' : doctorId,
-      'timing' : Timestamp.now(),
+      'time' : Timestamp.now(),
     });
     Navigator.of(context).push(MaterialPageRoute(
       builder: (ctx) => ChatScreen(Appointment(
@@ -37,6 +38,111 @@ class AppointmentProvider {
       'message' : message,
       'timestamp' : Timestamp.now(),
     });
+  }
+
+  static void joinVideoCall(BuildContext context, String appointmentId, String channnelId) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(
+          'Confirmation',
+          style: TextStyle(color: Colors.black, fontFamily: 'Lato'),
+        ),
+        content: Text(
+          'Are you sure you want to join this call?',
+          style: TextStyle(color: Colors.black, fontFamily: 'Lato'),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(
+              'No',
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Lato',
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          FlatButton(
+            onPressed: () { 
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => VideoCallScreen(
+                    channelName: channnelId,
+                    appointmentId: appointmentId,
+                    audioOnly: false,
+                  )
+                )
+              );
+            },
+            child: Text(
+              'Yes',
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Lato',
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      )
+    );
+  }
+
+  static void joinAudioCall(BuildContext context, String appointmentId, String channnelId) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(
+          'Confirmation',
+          style: TextStyle(color: Colors.black, fontFamily: 'Lato'),
+        ),
+        content: Text(
+          'Are you sure you want to join this call?',
+          style: TextStyle(color: Colors.black, fontFamily: 'Lato'),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(
+              'No',
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Lato',
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          FlatButton(
+            onPressed: () { 
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => VideoCallScreen(
+                    channelName: channnelId,
+                    appointmentId: appointmentId,
+                    audioOnly: true,
+                  )
+                )
+              );
+            },
+            child: Text('Yes',
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Lato',
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      )
+    );
   }
 
 }
