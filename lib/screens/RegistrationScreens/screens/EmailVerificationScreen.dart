@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/PrimaryButton.dart';
-import '../services/FirebaseAuthenticationService.dart';
+import '../../../widgets/PrimaryButton.dart';
+import '../../../services/FirebaseAuthenticationService.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
 

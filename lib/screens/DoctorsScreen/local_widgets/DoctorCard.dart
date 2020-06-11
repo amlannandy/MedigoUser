@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../models/Doctor.dart';
-import '../widgets/CustomText.dart';
-import '../services/AppointmentProvider.dart';
+import '../../../models/Doctor.dart';
+import '../../../widgets/CustomText.dart';
+import '../../../services/AppointmentProvider.dart';
 
 Widget doctorCard(BuildContext context, Doctor doctor) {
   return Container(

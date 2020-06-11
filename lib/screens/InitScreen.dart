@@ -16,6 +16,7 @@ class _InitScreenState extends State<InitScreen> {
 
   bool _redirect;
   String _redirectURL;
+  String userId = "";
 
   Future<bool> _checkAuthStatus(BuildContext ctx) async {
     try {
@@ -25,6 +26,7 @@ class _InitScreenState extends State<InitScreen> {
         _redirectURL = "/login";
         return true;
       }
+      userId = currentUser.uid;
       if (currentUser.email != null) {
         if (currentUser.email.isNotEmpty) {
           if (!currentUser.isEmailVerified) {
@@ -84,7 +86,7 @@ class _InitScreenState extends State<InitScreen> {
                   new Future.delayed(Duration(milliseconds: 500), () {
                     print("Redirect: $_redirect $_redirectURL  |");
                     if (_redirect) {
-                      Navigator.of(context).pushReplacementNamed(_redirectURL);
+                      Navigator.of(context).pushReplacementNamed(_redirectURL, arguments: userId);
                     }
                   });
                   return Container();

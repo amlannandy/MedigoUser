@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../widgets/ChatAppBar.dart';
-import '../models/Appointment.dart';
-import '../widgets/InputField.dart';
-import '../widgets/RecieveCall.dart';
-import '../widgets/MessagesStream.dart';
-import '../services/UserDatabaseService.dart';
+import '../local_widgets/ChatAppBar.dart';
+import '../../../models/Appointment.dart';
+import '../local_widgets/InputField.dart';
+import '../local_widgets/RecieveCall.dart';
+import '../local_widgets/MessagesStream.dart';
+import '../../../services/UserDatabaseService.dart';
 
 class ChatScreen extends StatefulWidget {
 

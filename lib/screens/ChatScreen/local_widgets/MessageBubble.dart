@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/Message.dart';
+import '../../../models/Message.dart';
 
 Widget messageBubble(BuildContext context, Message message, String userId) {
   return Container(

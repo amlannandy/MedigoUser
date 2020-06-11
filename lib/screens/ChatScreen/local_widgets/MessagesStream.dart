@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../models/Message.dart';
-import '../widgets/MessageBubble.dart';
+import '../../../models/Message.dart';
+import '../local_widgets/MessageBubble.dart';
 
 class MessagesStream extends StatelessWidget {
 

@@ -4,9 +4,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../models/Appointment.dart';
-import '../widgets/OngoingCallCover.dart';
-import '../services/UserDatabaseService.dart';
+import '../../../models/Appointment.dart';
+import '../local_widgets/OngoingCallCover.dart';
+import '../../../services/UserDatabaseService.dart';
 
 const APP_ID = '6554c5c9c8744d6889be04d478b2c327';
 

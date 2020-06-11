@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../services/AppointmentProvider.dart';
-import '../widgets/PrimaryButton.dart';
+import '../../../services/AppointmentProvider.dart';
+import '../../../widgets/PrimaryButton.dart';
 
 class RecieveCall extends StatelessWidget {
 

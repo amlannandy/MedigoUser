@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../models/Doctor.dart';
-import '../services/UserDatabaseService.dart';
+import '../../../models/Doctor.dart';
+import '../../../services/UserDatabaseService.dart';
 
 final UserDatabaseService userDatabaseService = UserDatabaseService();
 

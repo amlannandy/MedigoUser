@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/MenuItem.dart';
+import '../../../models/MenuItem.dart';
 
 class MenuItemWidget extends StatelessWidget {
 

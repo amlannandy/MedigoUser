@@ -13,6 +13,9 @@ class Appointment {
   final String channelId;
   final bool videoCallActive;
   final bool audioCallActive;
+  final String lastMessage;
+  final Timestamp lastTimestamp;
+  final bool unread;
 
   const Appointment({
     @required this.id,
@@ -23,6 +26,9 @@ class Appointment {
     this.channelId,
     this.videoCallActive,
     this.audioCallActive,
+    this.lastMessage,
+    this.lastTimestamp,
+    this.unread,
   });
 
   factory Appointment.fromFirestore(DocumentSnapshot snapshot) {
@@ -38,6 +44,9 @@ class Appointment {
       channelId: data['channelId'] ?? null,
       videoCallActive: data['videoCallActive'] ?? false,
       audioCallActive: data['audioCallActive'] ?? false,
+      lastMessage: data['lastMessage'] ?? 'Send a message...',
+      lastTimestamp: data['lastTimestamp'] ?? data['time'],
+      unread: data['unread'] ?? false,
     );
     return appointment;
   }

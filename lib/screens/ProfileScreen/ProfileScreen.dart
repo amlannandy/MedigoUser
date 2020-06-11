@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../models/MedigoUser.dart';
-import '../widgets/CustomText.dart';
-import '../services/UserInfoProvider.dart';
-import '../services/UserDatabaseService.dart';
+import '../../models/MedigoUser.dart';
+import '../../widgets/CustomText.dart';
+import '../../services/UserInfoProvider.dart';
+import '../../services/UserDatabaseService.dart';
 
 enum ProfileMode {
   View,

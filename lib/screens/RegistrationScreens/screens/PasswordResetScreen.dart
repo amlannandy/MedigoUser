@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/PrimaryButton.dart';
-import '../widgets/CustomTextField.dart';
-import '../services/FirebaseAuthenticationService.dart';
+import '../../../widgets/PrimaryButton.dart';
+import '../../../widgets/CustomTextField.dart';
+import '../../../services/FirebaseAuthenticationService.dart';
 
 class PasswordResetScreen extends StatefulWidget {
 

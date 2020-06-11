@@ -3,12 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import './screens/InitScreen.dart';
-import './screens/LoginScreen.dart';
-import './screens/ParentScreen.dart';
-import './screens/ProfileScreen.dart';
-import './screens/UserInfoScreen.dart';
-import './screens/PasswordResetScreen.dart';
-import './screens/EmailVerificationScreen.dart';
+import './screens/ParentScreen/ParentScreen.dart';
+import './screens/ProfileScreen/ProfileScreen.dart';
+import './screens/RegistrationScreens/screens/LoginScreen.dart';
+import './screens/RegistrationScreens/screens/UserInfoScreen.dart';
+import './screens/RegistrationScreens/screens/PasswordResetScreen.dart';
+import './screens/RegistrationScreens/screens/EmailVerificationScreen.dart';
 
 void main() => runApp(MedigoApp());
 

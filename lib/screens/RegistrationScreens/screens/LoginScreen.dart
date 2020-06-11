@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/CustomTextField.dart';
-import '../widgets/PasswordField.dart';
-import '../widgets/PrimaryButton.dart';
-import '../widgets/SocialIcon.dart';
-import '../widgets/StyledDivider.dart';
-import '../services/FirebaseAuthenticationService.dart';
+import '../../../widgets/CustomTextField.dart';
+import '../local_widgets/PasswordField.dart';
+import '../../../widgets/PrimaryButton.dart';
+import '../local_widgets/SocialIcon.dart';
+import '../local_widgets/StyledDivider.dart';
+import '../../../services/FirebaseAuthenticationService.dart';
 
 enum AuthMode {
   Login,

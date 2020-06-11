@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../models/MenuItem.dart';
-import '../widgets/UserInfo.dart';
-import '../widgets/MenuItem.dart';
-import '../services/FirebaseAuthenticationService.dart';
+import '../../models/MenuItem.dart';
+import './local_widgets/UserInfo.dart';
+import './local_widgets/MenuItem.dart';
+import '../../services/FirebaseAuthenticationService.dart';
 
 class MenuScreen extends StatelessWidget {
 
@@ -35,19 +35,21 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        UserInfo(),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.55,
-          width: MediaQuery.of(context).size.width,
-          child: ListView.builder(
-            padding: const EdgeInsets.all(0),
-            itemBuilder: (ctx, index) => MenuItemWidget(menuItems[index]),
-            itemCount: menuItems.length,
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          UserInfo(),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.55,
+            width: MediaQuery.of(context).size.width,
+            child: ListView.builder(
+              padding: const EdgeInsets.all(0),
+              itemBuilder: (ctx, index) => MenuItemWidget(menuItems[index]),
+              itemCount: menuItems.length,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

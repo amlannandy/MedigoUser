@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/Appointment.dart';
-import '../screens/ChatScreen.dart';
-import '../screens/VideoCallScreen.dart';
+import '../screens/ChatScreen/screens/ChatScreen.dart';
+import '../screens/ChatScreen/screens/VideoCallScreen.dart';
 
 class AppointmentProvider {
 
@@ -37,6 +37,10 @@ class AppointmentProvider {
       'senderId' : userId,
       'message' : message,
       'timestamp' : Timestamp.now(),
+    });
+    Firestore.instance.collection('appointments').document(appointmentId).updateData({
+      'lastMessage' : message,
+      'lastTimestamp' : Timestamp.now(),
     });
   }
 

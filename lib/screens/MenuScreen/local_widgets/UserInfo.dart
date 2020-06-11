@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../models/MedigoUser.dart';
-import '../services/UserDatabaseService.dart';
+import '../../../models/MedigoUser.dart';
+import '../../../services/UserDatabaseService.dart';
 
 class UserInfo extends StatelessWidget {
 
@@ -27,7 +27,7 @@ class UserInfo extends StatelessWidget {
           }
           final user = snapshot.data;
           return Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
                 height: MediaQuery.of(context).size.height * 0.15,

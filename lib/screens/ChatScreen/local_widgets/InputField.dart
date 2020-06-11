@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../services/AppointmentProvider.dart';
+import '../../../services/AppointmentProvider.dart';
 
 Widget inputField({ BuildContext context, String userId, String appointmentId, TextEditingController controller }) {
   return Container(

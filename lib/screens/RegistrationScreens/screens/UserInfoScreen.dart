@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../widgets/PrimaryButton.dart';
-import '../widgets/CustomTextField.dart';
-import '../widgets/LightIconButton.dart';
-import '../services/UserInfoProvider.dart';
+import '../../../widgets/PrimaryButton.dart';
+import '../../../widgets/CustomTextField.dart';
+import '../local_widgets/LightIconButton.dart';
+import '../../../services/UserInfoProvider.dart';
 
 const GOOGLE_API_KEY = 'AIzaSyDBVjfQa1q54VHunVlWzaUDOvTmdkqUzC0';
 

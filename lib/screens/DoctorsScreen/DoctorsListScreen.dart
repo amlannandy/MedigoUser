@@ -1,21 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../models/Appointment.dart';
-import '../widgets/AppointmentCard.dart';
-import '../widgets/CustomText.dart';
+import '../../models/Doctor.dart';
+import '../../widgets/CustomText.dart';
+import './local_widgets/DoctorCard.dart';
 
-class AppointmentsScreen extends StatelessWidget {
-
+class DoctorsListsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    final user = Provider.of<FirebaseUser>(context);
-
     return Scaffold(
-      body: user == null ? loadingBanner() : Column(
+      body: Column(
         children: <Widget>[
           Container(
             alignment: Alignment.bottomCenter,
@@ -32,14 +26,14 @@ class AppointmentsScreen extends StatelessWidget {
               ),
             ),
             child: Text(
-              'Your Sessions',
+              'Our Doctors',
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
           Container(
             height: MediaQuery.of(context).size.height * 0.78,
             child: StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance.collection('appointments').where('userId', isEqualTo: user.uid).snapshots(),
+              stream: Firestore.instance.collection('doctors').where('isVerified', isEqualTo: true).snapshots(),
               builder: (ctx, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return loadingBanner();
@@ -47,19 +41,19 @@ class AppointmentsScreen extends StatelessWidget {
                 if (!snapshot.hasData) {
                   return emptyBanner(context);
                 }
-                final appointmentDocuments = snapshot.data.documents;
-                print(appointmentDocuments);
-                List<Appointment> appointments = [];
-                appointmentDocuments.forEach((doctor) {
-                  appointments.add(Appointment.fromFirestore(doctor));
+                final doctorsDocuments = snapshot.data.documents;
+                print(doctorsDocuments);
+                List<Doctor> doctors = [];
+                doctorsDocuments.forEach((doctor) {
+                  doctors.add(Doctor.fromFirestore(doctor));
                 });
-                if (appointments.isEmpty) {
+                if (doctors.isEmpty) {
                   return emptyBanner(context);
                 }
                 return ListView.builder(
                   padding: const EdgeInsets.all(0),
-                  itemBuilder: (ctx, index) => AppointmentCard(appointments[index]),
-                  itemCount: appointments.length,
+                  itemBuilder: (ctx, index) => doctorCard(context, doctors[index]),
+                  itemCount: doctors.length,
                 );
               },
             ),
@@ -81,11 +75,10 @@ class AppointmentsScreen extends StatelessWidget {
   Widget emptyBanner(BuildContext context) {
     return Center(
       child: CustomText(
-        text: "No Appointments",
+        text: "No Doctors available",
         size: 16,
         color: Theme.of(context).primaryColor,
       ),
     );
   }
-  
 }
