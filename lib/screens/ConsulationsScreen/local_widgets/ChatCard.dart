@@ -37,6 +37,7 @@ Widget chatCard(BuildContext context, Appointment appointment) {
                   CircleAvatar(
                     radius: 35.0,
                     backgroundImage: NetworkImage(doctor.imageUrl),
+                    backgroundColor: Colors.white,
                   ),
                   SizedBox(width: 10.0),
                   Column(

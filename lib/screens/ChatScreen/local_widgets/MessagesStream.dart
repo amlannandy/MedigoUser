@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../models/Message.dart';
 import '../local_widgets/MessageBubble.dart';
+import './EmptyBanner.dart';
 
 class MessagesStream extends StatelessWidget {
 
@@ -34,16 +35,7 @@ class MessagesStream extends StatelessWidget {
         }
         if (messages.isEmpty) {
           return Expanded(
-            child: Center(
-              child: Text(
-                'No Messages',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 32,
-                  fontFamily: 'Lato',
-                ),
-              ),
-            ),
+            child: emptyBanner(context),
           );
         }
         messages = [...messages.reversed];

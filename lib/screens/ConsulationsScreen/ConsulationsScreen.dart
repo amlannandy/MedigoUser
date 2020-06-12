@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../widgets/CustomText.dart';
 import '../../widgets/LoadingSpinner.dart';
 import './local_widgets/ConsulationsList.dart';
 
@@ -17,15 +16,6 @@ class ConsultationsScreen extends StatelessWidget {
       child: user == null ? loadingSpinner(context) : consulationsList(context, user.uid)
     );
   }
-  
-  Widget emptyBanner(BuildContext context) {
-    return Center(
-      child: CustomText(
-        text: "No Appointments",
-        size: 16,
-        color: Theme.of(context).primaryColor,
-      ),
-    );
-  }
+
   
 }

@@ -14,7 +14,7 @@ class MenuItemWidget extends StatelessWidget {
       onTap: () => item.onPress(context),
       child: Container(
         margin: const EdgeInsets.symmetric(
-          vertical: 10,
+          vertical: 7.5,
           horizontal: 15,
         ),
         decoration: BoxDecoration(

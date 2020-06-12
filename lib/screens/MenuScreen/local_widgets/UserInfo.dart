@@ -17,7 +17,6 @@ class UserInfo extends StatelessWidget {
     print(MediaQuery.of(context).size.height);
 
     return Container(
-      height: MediaQuery.of(context).size.height * 0.35,
       width: MediaQuery.of(context).size.width,
       child: user == null ? Container() : StreamBuilder<MedigoUser>(
         stream: userDatabaseService.streamUser(user.uid),
@@ -59,7 +58,6 @@ class UserInfo extends StatelessWidget {
                   fontFamily: 'Lato',
                 ),
               ),
-              SizedBox(height: 15),
             ],
           );
         },

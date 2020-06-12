@@ -13,8 +13,9 @@ class Doctor {
   final String hospital;
   final String city;
   final Position location;
-  bool isVerified;
-  bool isActive;
+  final double experience;
+  final bool isVerified;
+  final bool isActive;
 
   Doctor({
     @required this.userId,
@@ -26,6 +27,7 @@ class Doctor {
     @required this.hospital,
     @required this.city,
     @required this.location,
+    @required this.experience,
     @required this.isActive,
     @required this.isVerified,
   });
@@ -46,6 +48,7 @@ class Doctor {
       ) ?? null,
       isActive: data['isActive'] ?? false,
       isVerified: data['isVerified'] ?? false,
+      experience: data['experience'] ?? 2,
     );
   }
 
@@ -68,6 +71,7 @@ class Doctor {
       ) ?? null,
       isActive: data['isActive'] ?? false,
       isVerified: data['isVerified'] ?? false,
+      experience: data['experience'] ?? 2,
     );
     return doctor;
   }

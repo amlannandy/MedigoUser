@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
-Widget buttonsRow() {
+import '../../../models/Appointment.dart';
+import '../local_widgets/IconButton.dart';
+import '../../ChatScreen/screens/ChatScreen.dart';
+
+Widget buttonsRow(BuildContext context, Appointment appointment) {
   return Padding(
     padding: const EdgeInsets.all(5),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        IconButton(
-          icon: Icon(
-            LineIcons.comment,
-            color: Colors.black.withOpacity(0.8),
-          ),
-          onPressed: () {},
+        iconButton(
+          context,
+          icon: LineIcons.comment_o,
+          text: 'Chat',
+          onPress: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (ctx) => ChatScreen(appointment),
+          )),
         ),
-        IconButton(
-          icon: Icon(
-            LineIcons.bar_chart,
-            color: Colors.black.withOpacity(0.8),
-          ),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: Icon(
-            LineIcons.file_text_o,
-            color: Colors.black.withOpacity(0.8),
-          ),
-          onPressed: () {},
+        iconButton(
+          context,
+          icon: LineIcons.file_text_o,
+          text: 'Docs',
+          onPress: () {}
         ),
       ],
     ),

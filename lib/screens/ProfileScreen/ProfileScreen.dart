@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../models/MedigoUser.dart';
-import '../../widgets/CustomText.dart';
+//import '../../widgets/CustomText.dart';
 import '../../services/UserInfoProvider.dart';
 import '../../services/UserDatabaseService.dart';
 
@@ -143,12 +143,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          CustomText(
-            text: title,
-            size: 20,
-            color: Colors.grey[700],
-            isBold: true,
-          ),
+          // CustomText(
+          //   text: title,
+          //   size: 20,
+          //   color: Colors.grey[700],
+          //   isBold: true,
+          // ),
           InkWell(
             onTap: () {
               if (_mode == ProfileMode.View)
