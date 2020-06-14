@@ -5,6 +5,7 @@ import '../../../models/Doctor.dart';
 import '../local_widgets/DataPacket.dart';
 import '../local_widgets/RatingContainer.dart';
 import '../local_widgets/SmallIconButton.dart';
+import '../../../services/AppointmentProvider.dart';
 
 Widget doctorCard(BuildContext context, Doctor doctor) {
   return Container(
@@ -81,7 +82,7 @@ Widget buttonsRow(BuildContext context, Doctor doctor) {
         context,
         icon: LineIcons.users,
         text: 'Consult',
-        onPress: () {}
+        onPress: () => AppointmentProvider.createAppointment(context, doctor.userId)
       ),
       smallIconButton(
         context,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../models/MedigoUser.dart';
 import '../services/UserDatabaseService.dart';
+import '../services/NotificationHandler.dart';
 
 class InitScreen extends StatefulWidget {
 
@@ -36,6 +37,7 @@ class _InitScreenState extends State<InitScreen> {
           }
         }
       }
+      NotificationHandler().registerNotification(currentUser.uid);
       print("Current User: $currentUser");
       print(currentUser.uid);
       UserDatabaseService databaseService = UserDatabaseService();

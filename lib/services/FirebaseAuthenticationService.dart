@@ -6,6 +6,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
+import './NotificationHandler.dart';
+
 class FirebaseAuthenticationService {
   
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -67,8 +69,7 @@ class FirebaseAuthenticationService {
       return;
     }
     try {
-      AuthResult result = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       print(result.user.email);
       switchLoading();
       Navigator.of(context).pushReplacementNamed('/init');
@@ -215,6 +216,8 @@ class FirebaseAuthenticationService {
   }
 
   Future<void> logOut(BuildContext context) async {
+    FirebaseUser user = await _auth.currentUser();
+    NotificationHandler().removeNotification(user.uid);
     await _auth.signOut();
     await _googleSignIn.signOut();
     await _facebookLogin.logOut();
