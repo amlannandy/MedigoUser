@@ -1,3 +1,4 @@
+import 'package:Medigo/screens/FlitersScreen/FiltersScreen.dart';
 import 'package:flutter/material.dart';
 
 import './DoctorFieldButton.dart';
@@ -82,7 +83,9 @@ class ChooseFieldCard extends StatelessWidget {
                 for (var category in categories) doctorFieldButton(
                   context,
                   text: category,
-                  onPress: () {}
+                  onPress: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => FiltersScreen(category),
+                  ))
                 ),
               ],
             )
