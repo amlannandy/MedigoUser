@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import './screens/InitScreen.dart';
 import './screens/ParentScreen/ParentScreen.dart';
+import './screens/EnquiryScreen/EnquiryScreen.dart';
 import './screens/ProfileScreen/ProfileScreen.dart';
 import './screens/MenuScreen/screens/WebViewScreen.dart';
 import './screens/RegistrationScreens/screens/LoginScreen.dart';
@@ -44,6 +45,7 @@ class MedigoApp extends StatelessWidget {
           '/profile' : (ctx) => ProfileScreen(),
           '/emailverification' : (ctx) => EmailVerificationScreen(),
           '/passwordreset' : (ctx) => PasswordResetScreen(),
+          '/enquiry' : (ctx) => EnquiryScreen(),
           '/webview' : (ctx) => WebViewScreen(),
         },
       ),

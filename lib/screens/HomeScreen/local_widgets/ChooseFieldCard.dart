@@ -8,12 +8,11 @@ class ChooseFieldCard extends StatelessWidget {
   final List categories = [
     'General',
     'Dermatology',
-    'Neurology',
-    'Opthamology',
-    'General',
-    'Dermatology',
-    'Neurology',
-    'Opthamology',
+    'Pediatrics',
+    'Pathology',
+    'Oncology',
+    'Radiology',
+    'Urology',
   ];
 
   @override
@@ -56,7 +55,7 @@ class ChooseFieldCard extends StatelessWidget {
                   color: Colors.black.withOpacity(0.8),
                   padding: const EdgeInsets.all(10),
                   child: Text(
-                    'Choose a field doctor',
+                    'Consult our Specialists',
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Lato',

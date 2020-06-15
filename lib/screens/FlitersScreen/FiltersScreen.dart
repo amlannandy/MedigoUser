@@ -1,8 +1,7 @@
-import 'package:Medigo/screens/ConsulationsScreen/ConsulationsScreen.dart';
-import 'package:Medigo/screens/DoctorsScreen/DoctorsListScreen.dart';
 import 'package:flutter/material.dart';
 
 import './local_widgets/CustomAppBar.dart';
+import '../../screens/DoctorsScreen/DoctorsListScreen.dart';
 
 class FiltersScreen extends StatelessWidget {
 

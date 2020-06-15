@@ -81,7 +81,7 @@ class ConsultNowCard extends StatelessWidget {
                 context,
                 icon: LineIcons.play_circle_o,
                 text: 'START',
-                onPress: () {}
+                onPress: () => Navigator.of(context).pushNamed('/enquiry')
               ),
             ],
           ),
