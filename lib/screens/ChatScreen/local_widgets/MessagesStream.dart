@@ -3,15 +3,18 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import './EmptyBanner.dart';
+import '../../../models/Appointment.dart';
 import '../../../models/Message.dart';
 import '../local_widgets/MessageBubble.dart';
-import './EmptyBanner.dart';
+import '../../../widgets/LoadingSpinner.dart';
+import '../../../services/AppointmentProvider.dart';
 
 class MessagesStream extends StatelessWidget {
 
-  final String appointmentId;
+  final Appointment appointment;
 
-  MessagesStream(this.appointmentId);
+  MessagesStream(this.appointment);
 
   final Firestore _firestore = Firestore.instance;
 
@@ -21,10 +24,13 @@ class MessagesStream extends StatelessWidget {
     final user = Provider.of<FirebaseUser>(context);
 
     return user == null ? Container() : StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection('appointments').document(appointmentId).collection('messages').snapshots(),
+      stream: _firestore.collection('appointments').document(appointment.id).collection('messages').snapshots(),
       builder: (context, snapshot) {
         var messageDocuments;
         List<Message> messages = [];
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return loadingSpinner(context);
+        }
         if (snapshot.hasData) {
           messageDocuments = snapshot.data.documents;
           if (messageDocuments != null) {
@@ -42,7 +48,7 @@ class MessagesStream extends StatelessWidget {
         return Expanded(
           child: ListView.builder(
             reverse: true,
-            itemBuilder: (ctx, index) => messageBubble(context, messages[index], user.uid),
+            itemBuilder: (ctx, index) => messageBubble(context, messages[index], user.uid, appointment),
             itemCount: messages.length,
           ),
         );

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../models/Message.dart';
+import '../../../models/Appointment.dart';
 
-Widget messageBubble(BuildContext context, Message message, String userId) {
+Widget messageBubble(BuildContext context, Message message, String userId, Appointment appointment) {
   return Container(
     margin: EdgeInsets.only(
       top: 10,
@@ -18,14 +20,49 @@ Widget messageBubble(BuildContext context, Message message, String userId) {
         borderRadius: BorderRadius.circular(25)
       ),
       width: MediaQuery.of(context).size.width * 0.6,
-      child: Text(
-          message.message,
-          style: TextStyle(
-            fontFamily: 'Varela',
-            fontSize: 14,
-            color: Colors.white
+      child: Column(
+        children: <Widget>[
+          Container(
+            alignment: userId == message.senderId ? Alignment.centerRight : Alignment.centerLeft,
+            child: Text(
+              message.message,
+              style: TextStyle(
+                fontFamily: 'Varela',
+                fontSize: 16,
+                color: Colors.white
+              ),
+            ),
           ),
-        ),
+          SizedBox(height: 5),
+          Container(
+            alignment: userId == message.senderId ? Alignment.bottomRight : Alignment.bottomLeft,
+            child: Row(
+              mainAxisAlignment: userId == message.senderId ? MainAxisAlignment.end : MainAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  DateFormat('kk:mm').format(message.timestamp.toDate()),
+                  style: TextStyle(
+                    fontFamily: 'Lato',
+                    fontSize: 10,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                userId != message.senderId ? Container() : SizedBox(width: 10),
+                userId != message.senderId ? Container() : Text(
+                  message.timestamp.toDate().compareTo(appointment.doctorLastSeen.toDate()) < 0 ? 'R' : '',
+                  style: TextStyle(
+                    fontFamily: 'Lato',
+                    fontSize: 12,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     ),
   );
 }

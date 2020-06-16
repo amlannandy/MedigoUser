@@ -14,9 +14,14 @@ Widget chatCard(BuildContext context, Appointment appointment) {
       builder: (ctx) => ChatScreen(appointment),
     )),
     child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      padding: EdgeInsets.only(
+        top: 10,
+        bottom: 10,
+        left: 20,
+        right: 20,
+      ),
       decoration: BoxDecoration(
-        color: appointment.unread ? Theme.of(context).primaryColor.withOpacity(0.1) : Colors.white,
+        color: appointment.lastTimestamp.toDate().compareTo(appointment.userLastSeen.toDate()) > 0 ? Theme.of(context).primaryColor.withOpacity(0.1) : Colors.white,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(15),
           topRight: Radius.circular(15)
@@ -84,7 +89,7 @@ Widget chatCard(BuildContext context, Appointment appointment) {
                 ),
               ),
               SizedBox(height: 5.0),
-              appointment.unread ? Container(
+                appointment.lastTimestamp.toDate().compareTo(appointment.userLastSeen.toDate()) > 0 ? Container(
                 width: 40.0,
                 height: 20.0,
                 decoration: BoxDecoration(

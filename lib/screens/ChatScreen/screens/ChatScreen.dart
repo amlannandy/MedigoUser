@@ -1,3 +1,5 @@
+import 'package:Medigo/screens/ChatScreen/local_widgets/UserDashboard.dart';
+import 'package:Medigo/services/AppointmentProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -26,6 +28,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     getCameraAndMicPermission();
+    AppointmentProvider.updateLastSeen(widget.appointment.id);
     super.initState();
   }
 
@@ -38,6 +41,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: chatAppBar(context, widget.appointment.id, widget.appointment.doctorId),
+      endDrawer: UserDashboard(),
       body: StreamBuilder<Appointment>(
         stream: userDatabaseService.streamAppointment(widget.appointment.id),
         builder: (context, snapshot) {
@@ -52,7 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
           }
           return Column(
             children: <Widget>[
-              MessagesStream(widget.appointment.id),
+              MessagesStream(widget.appointment),
               inputField(
                 context: context,
                 controller: _textController,

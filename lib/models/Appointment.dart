@@ -16,6 +16,8 @@ class Appointment {
   final String lastMessage;
   final Timestamp lastTimestamp;
   final bool unread;
+  final Timestamp userLastSeen;
+  final Timestamp doctorLastSeen;
 
   const Appointment({
     @required this.id,
@@ -29,6 +31,8 @@ class Appointment {
     this.lastMessage,
     this.lastTimestamp,
     this.unread,
+    this.userLastSeen,
+    this.doctorLastSeen,
   });
 
   factory Appointment.fromFirestore(DocumentSnapshot snapshot) {
@@ -47,6 +51,8 @@ class Appointment {
       lastMessage: data['lastMessage'] ?? 'Send a message...',
       lastTimestamp: data['lastTimestamp'] ?? data['time'],
       unread: data['unread'] ?? false,
+      userLastSeen: data['userLastSeen'] ?? Timestamp.now(),
+      doctorLastSeen: data['doctorLastSeen'] ?? Timestamp.now(),
     );
     return appointment;
   }

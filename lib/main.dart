@@ -1,3 +1,4 @@
+import 'package:Medigo/screens/LoadingScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -47,6 +48,7 @@ class MedigoApp extends StatelessWidget {
           '/passwordreset' : (ctx) => PasswordResetScreen(),
           '/enquiry' : (ctx) => EnquiryScreen(),
           '/webview' : (ctx) => WebViewScreen(),
+          '/loading': (ctx) => LoadiingScreen(),
         },
       ),
     );

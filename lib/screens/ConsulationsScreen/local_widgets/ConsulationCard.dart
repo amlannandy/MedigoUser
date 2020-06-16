@@ -20,7 +20,6 @@ class ConsultationCard extends StatelessWidget {
         right: 10,
       ),
       padding: const EdgeInsets.only(
-        top: 5,
         bottom: 10,
       ),
       decoration: BoxDecoration(
@@ -41,6 +40,7 @@ class ConsultationCard extends StatelessWidget {
       child: Column(
         children: <Widget>[
           chatCard(context, appointment),
+          SizedBox(height: 10),
           buttonsRow(context, appointment),
         ],
       ),

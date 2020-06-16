@@ -55,39 +55,12 @@ Widget chatAppBar(BuildContext context, String appointmentId, String doctorId) {
       ),
     ),
     actions: <Widget>[
-      PopupMenuButton(
+      IconButton(
         icon: Icon(
-          LineIcons.gear,
+          LineIcons.cog,
           color: Colors.black.withOpacity(0.8),
         ),
-        itemBuilder: (_) => [
-          PopupMenuItem(
-            child: InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                width: double.infinity,
-                child: Row(
-                  children: <Widget>[
-                    Icon(
-                      LineIcons.warning,
-                      color: Colors.black.withOpacity(0.8),
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      "Report Patient",
-                      style: TextStyle(
-                        color: Colors.black.withOpacity(0.8),
-                        fontFamily: 'Lato',
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+        onPressed: () => Scaffold.of(context).openEndDrawer(),
       ),
     ],
     bottom: PreferredSize(child: Container(color: Colors.black.withOpacity(0.8), height: 0.4,), preferredSize: Size.fromHeight(4.0)),

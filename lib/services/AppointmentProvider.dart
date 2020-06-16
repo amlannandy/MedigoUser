@@ -29,6 +29,12 @@ class AppointmentProvider {
     ));
   }
 
+  static void updateLastSeen(String appointmentId) {
+    Firestore.instance.collection('appointments').document(appointmentId).updateData({
+      'userLastSeen' : Timestamp.now(),
+    });
+  }
+
   static void sendMessage(String appointmentId, String userId, String message) {
     if (message.isEmpty) {
       return;
@@ -41,6 +47,7 @@ class AppointmentProvider {
     Firestore.instance.collection('appointments').document(appointmentId).updateData({
       'lastMessage' : message,
       'lastTimestamp' : Timestamp.now(),
+      'userLastSeen' : Timestamp.now(),
     });
   }
 

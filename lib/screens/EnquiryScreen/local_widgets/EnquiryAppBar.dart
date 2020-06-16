@@ -1,4 +1,3 @@
-import 'package:Medigo/services/AppointmentProvider.dart';
 import 'package:flutter/material.dart';
 
 Widget enquiryAppBar(BuildContext context, String title) {
@@ -29,8 +28,7 @@ Widget enquiryAppBar(BuildContext context, String title) {
           color: Colors.black.withOpacity(0.8),
         ),
         onPressed: () {
-          Navigator.of(context).pop();
-          AppointmentProvider.createAppointment(context, 'yvWEQFTyJaRmEumEWE8wc08cuGf1');
+          Navigator.of(context).pushReplacementNamed('/loading');
         }
       ),
     ],
