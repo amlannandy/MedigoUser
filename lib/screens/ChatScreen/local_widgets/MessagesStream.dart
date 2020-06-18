@@ -4,11 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import './EmptyBanner.dart';
-import '../../../models/Appointment.dart';
 import '../../../models/Message.dart';
+import '../../../models/Appointment.dart';
 import '../local_widgets/MessageBubble.dart';
 import '../../../widgets/LoadingSpinner.dart';
-import '../../../services/AppointmentProvider.dart';
 
 class MessagesStream extends StatelessWidget {
 
@@ -29,7 +28,7 @@ class MessagesStream extends StatelessWidget {
         var messageDocuments;
         List<Message> messages = [];
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return loadingSpinner(context);
+          return Expanded(child: loadingSpinner(context));
         }
         if (snapshot.hasData) {
           messageDocuments = snapshot.data.documents;
@@ -40,9 +39,7 @@ class MessagesStream extends StatelessWidget {
           }
         }
         if (messages.isEmpty) {
-          return Expanded(
-            child: emptyBanner(context),
-          );
+          return Expanded(child: emptyBanner(context));
         }
         messages = [...messages.reversed];
         return Expanded(
