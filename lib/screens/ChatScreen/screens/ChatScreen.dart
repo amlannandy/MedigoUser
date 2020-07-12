@@ -1,8 +1,8 @@
-import 'package:Medigo/screens/ChatScreen/local_widgets/UserDashboard.dart';
-import 'package:Medigo/services/AppointmentProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:Medigo/services/AppointmentProvider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../local_widgets/UserDashboard.dart';
 import '../local_widgets/ChatAppBar.dart';
 import '../../../models/Appointment.dart';
 import '../local_widgets/InputField.dart';
@@ -40,8 +40,8 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: chatAppBar(context, widget.appointment.id, widget.appointment.doctorId),
-      endDrawer: UserDashboard(),
+      appBar: ChatAppBar(widget.appointment.doctorId),
+      endDrawer: UserDashboard(widget.appointment),
       body: StreamBuilder<Appointment>(
         stream: userDatabaseService.streamAppointment(widget.appointment.id),
         builder: (context, snapshot) {
@@ -62,6 +62,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 controller: _textController,
                 userId: widget.appointment.userId,
                 appointmentId: widget.appointment.id,
+                doctorId: widget.appointment.doctorId,
               ),
             ],
           );

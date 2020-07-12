@@ -13,9 +13,10 @@ class Doctor {
   final String hospital;
   final String city;
   final Position location;
-  final double experience;
+  final String clinicId;
   final bool isVerified;
-  final bool isActive;
+  final int experience;
+  final int age;
 
   Doctor({
     @required this.userId,
@@ -27,30 +28,11 @@ class Doctor {
     @required this.hospital,
     @required this.city,
     @required this.location,
-    @required this.experience,
-    @required this.isActive,
+    @required this.clinicId,
     @required this.isVerified,
+    @required this.experience,
+    @required this.age,
   });
-
-  factory Doctor.fromMap(Map data) {
-    return Doctor(
-      userId: data['userId'] ?? null, 
-      name: data['name'] ?? null,
-      phone: data['phone'] ?? null,
-      email: data['email'] ?? null,
-      imageUrl: data['imageUrl'] ?? null, 
-      field: data['field'] ?? null,
-      hospital: data['hospital'] ?? null,
-      city: data['city'] ?? null,
-      location: Position(
-        latitude: data['location'].latitude,
-        longitude: data['location'].longitude,
-      ) ?? null,
-      isActive: data['isActive'] ?? false,
-      isVerified: data['isVerified'] ?? false,
-      experience: data['experience'] ?? 2,
-    );
-  }
 
   factory Doctor.fromFirestore(DocumentSnapshot snapshot) {
     Map data = snapshot.data;
@@ -69,9 +51,10 @@ class Doctor {
         latitude: data['location'].latitude,
         longitude: data['location'].longitude,
       ) ?? null,
-      isActive: data['isActive'] ?? false,
+      clinicId: data['clinicId'] ?? null,
       isVerified: data['isVerified'] ?? false,
-      experience: data['experience'] ?? 2,
+      experience: data['experience'] ?? 0,
+      age: data['age'] ?? null,
     );
     return doctor;
   }

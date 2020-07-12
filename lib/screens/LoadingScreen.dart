@@ -3,6 +3,11 @@ import 'package:Medigo/services/AppointmentProvider.dart';
 import 'package:flutter/material.dart';
 
 class LoadiingScreen extends StatefulWidget {
+
+  final String reportId;
+
+  LoadiingScreen({this.reportId});
+
   @override
   _LoadiingScreenState createState() => _LoadiingScreenState();
 }
@@ -30,7 +35,7 @@ class _LoadiingScreenState extends State<LoadiingScreen> {
       (Timer timer) => Future.delayed(Duration(milliseconds: 300), () {
         if (count == 1) {
           Navigator.of(context).pop();
-          AppointmentProvider.createAppointment(context, 'yvWEQFTyJaRmEumEWE8wc08cuGf1');
+          AppointmentProvider.createAppointment(context, 'yvWEQFTyJaRmEumEWE8wc08cuGf1', 'yvWEQFTyJaRmEumEWE8wc08cuGf1', widget.reportId);
         } else {
           count--;
         } 

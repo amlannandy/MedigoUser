@@ -31,12 +31,12 @@ class MenuScreen extends StatelessWidget {
     MenuItem(
       title: 'Edit Profile',
       icon: LineIcons.user,
-      onPress: null,
+      onPress: (context) => Navigator.of(context).pushNamed('/profile'),
     ),
     MenuItem(
       title: 'Consultation History',
       icon: LineIcons.history,
-      onPress: () {},
+      onPress: (context) => Navigator.of(context).pushNamed('/history'),
     ),
     MenuItem(
       title: 'MediLocker',

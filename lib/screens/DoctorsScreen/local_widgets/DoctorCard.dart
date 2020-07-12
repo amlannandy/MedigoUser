@@ -5,7 +5,8 @@ import '../../../models/Doctor.dart';
 import '../local_widgets/DataPacket.dart';
 import '../local_widgets/RatingContainer.dart';
 import '../local_widgets/SmallIconButton.dart';
-import '../../../services/AppointmentProvider.dart';
+import '../../../models/DoctorArgs.dart';
+import '../../../screens/DoctorDetailsScreen/DoctorDetailsScreen.dart';
 
 Widget doctorCard(BuildContext context, Doctor doctor) {
   return Container(
@@ -82,13 +83,19 @@ Widget buttonsRow(BuildContext context, Doctor doctor) {
         context,
         icon: LineIcons.users,
         text: 'Consult',
-        onPress: () => AppointmentProvider.createAppointment(context, doctor.userId)
+        onPress: () => Navigator.of(context).pushNamed('/timeslot', arguments: DoctorArgs(
+          id: doctor.userId,
+          name: doctor.name,
+          field: doctor.field,
+          imageUrl: doctor.imageUrl,
+          )
+        ),
       ),
       smallIconButton(
         context,
         icon: LineIcons.chevron_right,
         text: 'Know more',
-        onPress: () {}
+        onPress: () => Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => DoctorDetailsScreen(doctor))),
       ),
     ],
   );

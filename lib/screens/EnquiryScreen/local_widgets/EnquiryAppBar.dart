@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget enquiryAppBar(BuildContext context, String title) {
+Widget enquiryAppBar(BuildContext context, String title, Function uploadData) {
   return AppBar(
     elevation: 0,
     backgroundColor: Colors.white,
@@ -27,9 +27,7 @@ Widget enquiryAppBar(BuildContext context, String title) {
           Icons.arrow_forward_ios,
           color: Colors.black.withOpacity(0.8),
         ),
-        onPressed: () {
-          Navigator.of(context).pushReplacementNamed('/loading');
-        }
+        onPressed: uploadData
       ),
     ],
     bottom: PreferredSize(child: Container(color: Colors.black.withOpacity(0.8), height: 0.4,), preferredSize: Size.fromHeight(4.0)),

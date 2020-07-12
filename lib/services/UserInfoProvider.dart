@@ -80,9 +80,8 @@ class UserInfoProvider {
     });
   }
 
-
-  static void updateUserInfo({String name, String age, String location}) async {
-    if (name.isEmpty || age.isEmpty || location.isEmpty) {
+  static void updateUserInfo({BuildContext context, String userId, String age, String height, String weight, String city}) {
+    if ( age.isEmpty || height.isEmpty || weight.isEmpty || city.isEmpty) {
       Fluttertoast.showToast(msg: "Please fill up all the fields");
       return;
     }
@@ -92,20 +91,23 @@ class UserInfoProvider {
     }
     try {
       int newAge = int.parse(age);
+      double.parse(height);
+      double.parse(weight);
       if (newAge < 18) {
-        Fluttertoast.showToast(msg: "Please enter a valid age");
+        Fluttertoast.showToast(msg: "Please enter valid numeric values");
         return;
       }
     } catch (e) {
       Fluttertoast.showToast(msg: "Please enter a valid age");
     }
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    Firestore.instance.collection('users').document(user.uid).updateData({
-      'name' : name,
+    Firestore.instance.collection('users').document(userId).updateData({
       'age' : int.parse(age),
-      'city' : location,
+      'imageUrl' : currentImageUrl,
+      'city' : city,
+      'height' : double.parse(height),
+      'weight' : double.parse(weight),
     });
     Fluttertoast.showToast(msg: "Profile updated", backgroundColor: Colors.green, textColor: Colors.white);
+    Navigator.of(context).pop();
   }
-
 }

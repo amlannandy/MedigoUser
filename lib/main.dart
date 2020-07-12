@@ -1,12 +1,16 @@
-import 'package:Medigo/screens/LoadingScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import './screens/InitScreen.dart';
+import 'screens/LoadingScreen.dart';
+import 'screens/LockerScreen/LockerScreen.dart';
 import './screens/ParentScreen/ParentScreen.dart';
 import './screens/EnquiryScreen/EnquiryScreen.dart';
 import './screens/ProfileScreen/ProfileScreen.dart';
+import './screens/TimeSlotScreen/TimeSlotScreen.dart';
+import 'screens/MenuScreen/screens/HistoryScreen.dart';
+import 'screens/ChatScreen/screens/FeedbackScreen.dart';
 import './screens/MenuScreen/screens/WebViewScreen.dart';
 import './screens/RegistrationScreens/screens/LoginScreen.dart';
 import './screens/RegistrationScreens/screens/UserInfoScreen.dart';
@@ -49,6 +53,10 @@ class MedigoApp extends StatelessWidget {
           '/enquiry' : (ctx) => EnquiryScreen(),
           '/webview' : (ctx) => WebViewScreen(),
           '/loading': (ctx) => LoadiingScreen(),
+          '/timeslot' : (ctx) => TimeSlotScreen(),
+          '/history' : (ctx) => AppointmentHistoryScreen(),
+          '/feedback' : (ctx) => FeedbackScreen(),
+          '/locker' : (ctx) => LockerScreen(),
         },
       ),
     );

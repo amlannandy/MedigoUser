@@ -1,4 +1,8 @@
+import 'package:Medigo/services/AppointmentProvider.dart';
+import 'package:Medigo/widgets/LoadingSpinner.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './local_widgets/EnquiryAppBar.dart';
 import './local_widgets/QuestionsStream.dart';
@@ -65,9 +69,16 @@ class _EnquiryScreenState extends State<EnquiryScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final user = Provider.of<FirebaseUser>(context);
+
     return Scaffold(
-      appBar: enquiryAppBar(context, 'Please give us more details'),
-      body: Column(
+      appBar: enquiryAppBar(
+        context, 
+        'Please give us more details',
+        user == null ? null : () => AppointmentProvider.uploadMedicalReport(userId: user.uid, queries: queries, context: context),
+      ),
+      body: user == null ? loadingSpinner(context) : Column(
         children: <Widget>[
           QuestionsStream(queries),
           answerField(

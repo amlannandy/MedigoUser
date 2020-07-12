@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Query {
@@ -12,5 +13,15 @@ class Query {
     @required this.byBot,
     this.onlyText = true,
   });
+
+  factory Query.fromFirestore(DocumentSnapshot snapshot) {
+    final doc = snapshot.data;
+    Query query = Query(
+      query: doc['query'] ?? null,
+      byBot: doc['byBot'] ?? false,
+      onlyText: doc['onlyText'] ?? true,
+    );
+    return query;
+  }
 
 }

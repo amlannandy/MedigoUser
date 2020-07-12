@@ -10,6 +10,8 @@ class MedigoUser {
   final String imageUrl;
   final String city;
   final Position location;
+  final double height;
+  final double weight;
 
   MedigoUser({
     @required this.userId,
@@ -18,21 +20,9 @@ class MedigoUser {
     @required this.city,
     @required this.location,
     @required this.imageUrl,
+    @required this.height,
+    @required this.weight,
   });
-
-  factory MedigoUser.fromMap(Map data) {
-    return MedigoUser(
-      userId: data['userId'] ?? null,
-      name: data['name'] ?? null,
-      age: data['age'] ?? null,
-      city: data['city'] ?? null,
-      imageUrl: data['imageUrl'] ?? "https://firebasestorage.googleapis.com/v0/b/agroacres-bbsr.appspot.com/o/MedigoUser_profile_photos%2Fdefault.png?alt=media&token=bce57e61-72f5-4a9e-a211-c40523912169",
-      location: Position(
-        latitude: data['location'].latitude,
-        longitude: data['location'].longitude,
-      ) ?? null,
-    );
-  }
 
   factory MedigoUser.fromFirestore(DocumentSnapshot snapshot) {
     Map data = snapshot.data;
@@ -48,6 +38,8 @@ class MedigoUser {
         latitude: data['location'].latitude,
         longitude: data['location'].longitude,
       ) ?? null,
+      height: data['height'] ?? 0,
+      weight: data['weight'] ?? 0,
     );
     return user;
   }
