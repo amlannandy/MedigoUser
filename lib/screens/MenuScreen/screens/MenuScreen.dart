@@ -41,7 +41,7 @@ class MenuScreen extends StatelessWidget {
     MenuItem(
       title: 'MediLocker',
       icon: LineIcons.lock,
-      onPress: () {},
+      onPress: (context) => Navigator.of(context).pushNamed('/locker'),
     ),
     MenuItem(
       title: 'Share with Friends',

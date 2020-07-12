@@ -27,6 +27,12 @@ class AppointmentProvider {
       'isBooked' : true,
       'reportId' : reportId,
     });
+    _firestore.collection('medicalreports').document(appointmentId).updateData({
+      'userId' : user.uid,
+    });
+    _firestore.collection('prescriptions').document(appointmentId).updateData({
+      'userId': user.uid
+    });
     Navigator.of(context).push(MaterialPageRoute(
       builder: (ctx) => ChatScreen(Appointment(
         userId: user.uid,

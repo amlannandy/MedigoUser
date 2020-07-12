@@ -8,6 +8,7 @@ class MedicalReport {
   final String userId;
   final String doctorId;
   final String date;
+  final String doctorName;
 
   MedicalReport({
     @required this.id,
@@ -15,6 +16,7 @@ class MedicalReport {
     @required this.userId,
     @required this.doctorId,
     @required this.date,
+    @required this.doctorName,
   });
 
   factory MedicalReport.fromFirestore(DocumentSnapshot snapshot) {
@@ -25,6 +27,7 @@ class MedicalReport {
       userId: doc['userId'] ?? null,
       doctorId: doc['doctorId'] ?? null,
       date: doc['date'] ?? null,
+      doctorName: doc['doctorName'] ?? 'Amlan Nandy'
     );
     return report;
   }

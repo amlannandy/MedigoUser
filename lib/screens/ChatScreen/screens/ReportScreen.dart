@@ -50,7 +50,7 @@ class _ReportScreenState extends State<ReportScreen> {
       child: Scaffold(
         appBar: customAppBar(
           context, 
-          'Prescription', 
+          widget.isPrescription ? 'Prescription' : 'Medical Report', 
           popCall: () => AppointmentProvider.updateMedicalReport(widget.appointmentId, _controller.text)
         ),
         backgroundColor: Colors.white,
