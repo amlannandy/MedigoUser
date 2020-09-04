@@ -1,3 +1,4 @@
 build/
 .dart_tool/
 MediGo.code-workspace
+android/app/google-services.json
